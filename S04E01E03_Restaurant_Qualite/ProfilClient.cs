@@ -2,10 +2,11 @@ namespace Restaurant.Qualite;
 
 public class ProfilClient
 {
-    public Coordonnees Coordonnees { get; }
+    public string Courriel => coordonnees.Courriel;
+    private Coordonnees coordonnees;
 
     public ProfilClient(string courriel)
     {
-        Coordonnees = new Coordonnees(courriel);
+        coordonnees = new Coordonnees(courriel);
     }
 }

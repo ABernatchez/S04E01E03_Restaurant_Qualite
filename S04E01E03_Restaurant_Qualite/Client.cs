@@ -2,10 +2,11 @@ namespace Restaurant.Qualite;
 
 public class Client
 {
-    public ProfilClient Profil { get; }
+    public string Courriel => profil.Courriel;
+    private ProfilClient profil;
 
     public Client(string courriel)
     {
-        Profil = new ProfilClient(courriel);
+        profil = new ProfilClient(courriel);
     }
 }
