@@ -1,6 +1,6 @@
 namespace Restaurant.Qualite;
 
-public class NotificationConsole
+public class NotificationConsole : INotificationCommande
 {
     public void NotifierCreation(int numeroCommande, string courriel)
     {
