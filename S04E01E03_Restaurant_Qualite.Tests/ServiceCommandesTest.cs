@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -21,5 +22,17 @@ public sealed class ServiceCommandesTest
         var _ = service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
 
         notificationEspion.Verifier(NUMERO_COMMANDE, EMAIL_CLIENT);
+    }
+
+    [Fact]
+    public void Creer_ClientEtNumeroCommandeValide_MoqNotificationCommandeEstAppeleAvecBonArgument()
+    {
+        Client client = new(EMAIL_CLIENT);
+        Mock<INotificationCommande> notificationEspion = new();
+        ServiceCommandes service = new(notificationEspion.Object);
+
+        var _ = service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
+
+        notificationEspion.Verify(e => e.NotifierCreation(NUMERO_COMMANDE, EMAIL_CLIENT), Times.Once);
     }
 }
