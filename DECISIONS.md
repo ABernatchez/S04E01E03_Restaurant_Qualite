@@ -11,15 +11,10 @@
 
 ## Exercice 2 — SRP et CQS
 
-À compléter :
-
-- raisons de changer distinctes des classes `ServiceCommandes` et
-  `CalculateurTaxe`;
-- état modifié par la méthode de commande `Creer` de la classe
-  `ServiceCommandes`;
-- absence d'effet observable de la méthode de requête
-  `ObtenirDerniereCommande` de la classe `ServiceCommandes`;
-- mise à jour des assemblages manuel et avec le cadriciel.
+- raisons de changer distinctes des classes `ServiceCommandes` et `CalculateurTaxe`: 1 pour chaque (Manageur de commandes et calculateur de taxe)
+- état modifié par la méthode de commande `Creer` de la classe `ServiceCommandes`: m_derniereCommande
+- absence d'effet observable de la méthode de requête `ObtenirDerniereCommande` de la classe `ServiceCommandes`: oui
+- mise à jour des assemblages manuel et avec le cadriciel: c'est fait
 
 ## Exercice 3 — Loi de Déméter
 
