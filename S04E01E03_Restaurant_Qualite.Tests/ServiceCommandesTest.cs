@@ -16,8 +16,9 @@ public sealed class ServiceCommandesTest
     public void Creer_ClientEtNumeroCommandeValide_NotificationCommandeEstAppeleAvecBonArgument()
     {
         NotificationCommaneEspion notificationEspion = new();
+        CalculateurTaxe calculateurTaxe = new();
         Client client = new(EMAIL_CLIENT);
-        ServiceCommandes service = new(notificationEspion);
+        ServiceCommandes service = new(notificationEspion, calculateurTaxe);
 
         var _ = service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
 
@@ -27,9 +28,10 @@ public sealed class ServiceCommandesTest
     [Fact]
     public void Creer_ClientEtNumeroCommandeValide_MoqNotificationCommandeEstAppeleAvecBonArgument()
     {
-        Client client = new(EMAIL_CLIENT);
         Mock<INotificationCommande> notificationEspion = new();
-        ServiceCommandes service = new(notificationEspion.Object);
+        CalculateurTaxe calculateurTaxe = new();
+        Client client = new(EMAIL_CLIENT);
+        ServiceCommandes service = new(notificationEspion.Object, calculateurTaxe);
 
         var _ = service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
 

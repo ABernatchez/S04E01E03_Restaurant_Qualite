@@ -2,18 +2,24 @@ namespace Restaurant.Qualite;
 
 public class ServiceCommandes
 {
-    private Commande? m_derniereCommande;
     private INotificationCommande m_notificationCommande;
+    private CalculateurTaxe m_calculateurTaxe;
 
-    public ServiceCommandes(INotificationCommande notificationCommande)
+    private Commande? m_derniereCommande;
+
+
+    public ServiceCommandes(INotificationCommande notificationCommande, CalculateurTaxe calculateurTaxe)
     {
         ArgumentNullException.ThrowIfNull(notificationCommande, nameof(notificationCommande));
         this.m_notificationCommande = notificationCommande;
+
+        ArgumentNullException.ThrowIfNull(calculateurTaxe, nameof(calculateurTaxe));
+        this.m_calculateurTaxe = calculateurTaxe;
     }
 
     public Commande Creer(int numero, decimal sousTotal, Client client)
     {
-        decimal taxe = sousTotal * 0.14975m;
+        decimal taxe = this.m_calculateurTaxe.Total(sousTotal);
         Commande commande = new(numero, sousTotal, taxe, client);
         m_derniereCommande = commande;
 

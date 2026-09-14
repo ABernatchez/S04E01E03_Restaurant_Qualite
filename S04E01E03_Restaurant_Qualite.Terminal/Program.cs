@@ -21,8 +21,9 @@ partial class Program
         Console.Out.WriteLine("\nManuel");
 
         NotificationConsole notificationConsole = new NotificationConsole();
+        CalculateurTaxe calculateurTaxe = new();
         Client client = new("client@exemple.ca");
-        ServiceCommandes service = new(notificationConsole);
+        ServiceCommandes service = new(notificationConsole, calculateurTaxe);
         Commande commande = service.Creer(1001, 40m, client);
 
         Console.Out.WriteLine($"Total : {commande.SousTotal + commande.Taxe:C}");
@@ -34,6 +35,7 @@ partial class Program
 
         var builder = Host.CreateApplicationBuilder(args);
         builder.Services.AddScoped<INotificationCommande, NotificationConsole>();
+        builder.Services.AddScoped<CalculateurTaxe>();
         builder.Services.AddScoped<Commande>();
         builder.Services.AddScoped<ServiceCommandes>();
         using IHost host = builder.Build();
