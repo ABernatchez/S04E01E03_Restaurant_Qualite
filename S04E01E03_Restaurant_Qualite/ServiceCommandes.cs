@@ -25,7 +25,7 @@ public class ServiceCommandes
 
         m_notificationCommande.NotifierCreation(
             commande.Numero,
-            commande.Client.Courriel
+            client.Courriel
         );
     }
 
