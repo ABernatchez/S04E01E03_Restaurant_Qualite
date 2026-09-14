@@ -18,8 +18,6 @@
 
 ## Exercice 3 — Loi de Déméter
 
-À compléter :
-
-- chaîne d’appels supprimée et message métier choisi;
-- état observé par l’espion manuel;
-- interaction équivalente vérifiée avec Moq.
+- chaîne d’appels supprimée et message métier choisi: commande.Client.Profil.Coordonnees.Courriel -> client.Courriel
+- état observé par l’espion manuel: Même qu'avant. Ne change rien dans le test
+- interaction équivalente vérifiée avec Moq: Même qu'avant. Ne change rien dans le test
