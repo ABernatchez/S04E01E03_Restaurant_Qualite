@@ -17,7 +17,7 @@ public class ServiceCommandes
         this.m_calculateurTaxe = calculateurTaxe;
     }
 
-    public Commande Creer(int numero, decimal sousTotal, Client client)
+    public void Creer(int numero, decimal sousTotal, Client client)
     {
         decimal taxe = this.m_calculateurTaxe.Total(sousTotal);
         Commande commande = new(numero, sousTotal, taxe, client);
@@ -27,8 +27,6 @@ public class ServiceCommandes
             commande.Numero,
             commande.Client.Profil.Coordonnees.Courriel
         );
-
-        return commande;
     }
 
     public Commande? ObtenirDerniereCommande()

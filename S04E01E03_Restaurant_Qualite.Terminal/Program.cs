@@ -24,9 +24,10 @@ partial class Program
         CalculateurTaxe calculateurTaxe = new();
         Client client = new("client@exemple.ca");
         ServiceCommandes service = new(notificationConsole, calculateurTaxe);
-        Commande commande = service.Creer(1001, 40m, client);
+        service.Creer(1001, 40m, client);
 
-        Console.Out.WriteLine($"Total : {commande.SousTotal + commande.Taxe:C}");
+        Commande? commande = service.ObtenirDerniereCommande();
+        Console.Out.WriteLine($"Total : {commande?.SousTotal + commande?.Taxe:C}");
     }
 
     static void AssemblageAutomatique(string[] args)
@@ -42,11 +43,12 @@ partial class Program
 
         using (IServiceScope score = host.Services.CreateScope())
         {
-            ServiceCommandes serviceCommandes = score.ServiceProvider.GetRequiredService<ServiceCommandes>();
+            ServiceCommandes service = score.ServiceProvider.GetRequiredService<ServiceCommandes>();
             Client client = new("client@exemple.ca");
-            Commande commande = serviceCommandes.Creer(1001, 40m, client);
+            service.Creer(1001, 40m, client);
 
-            Console.Out.WriteLine($"Total : {commande.SousTotal + commande.Taxe:C}");
+            Commande? commande = service.ObtenirDerniereCommande();
+            Console.Out.WriteLine($"Total : {commande?.SousTotal + commande?.Taxe:C}");
         }
     }
 }

@@ -20,7 +20,7 @@ public sealed class ServiceCommandesTest
         Client client = new(EMAIL_CLIENT);
         ServiceCommandes service = new(notificationEspion, calculateurTaxe);
 
-        var _ = service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
+        service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
 
         notificationEspion.Verifier(NUMERO_COMMANDE, EMAIL_CLIENT);
     }
@@ -33,8 +33,22 @@ public sealed class ServiceCommandesTest
         Client client = new(EMAIL_CLIENT);
         ServiceCommandes service = new(notificationEspion.Object, calculateurTaxe);
 
-        var _ = service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
+        service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
 
         notificationEspion.Verify(e => e.NotifierCreation(NUMERO_COMMANDE, EMAIL_CLIENT), Times.Once);
+    }
+
+    [Fact]
+    public void ObtenirDerniereCommande_AvecDerniereCommandeNonNull_RetourneDerniereCommande()
+    {
+        NotificationCommaneEspion notificationEspion = new();
+        CalculateurTaxe calculateurTaxe = new();
+        Client client = new(EMAIL_CLIENT);
+        ServiceCommandes service = new(notificationEspion, calculateurTaxe);
+
+        service.Creer(NUMERO_COMMANDE, TEST_SOUS_TOTAL, client);
+        Commande? commande = service.ObtenirDerniereCommande();
+
+        Assert.Equal(NUMERO_COMMANDE, commande?.Numero);
     }
 }
